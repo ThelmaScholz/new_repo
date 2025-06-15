@@ -1,51 +1,61 @@
-def ASSIGNMENT(new_list, i, old_list, j):
-    new_list[i] = old_list[j]
+import matplotlib.pyplot as plt  
 
 
-def mergeSort(list_to_sort_by_merge):
-    if (
-        len(list_to_sort_by_merge) > 1
-        and not len(list_to_sort_by_merge) < 1
-        and len(list_to_sort_by_merge) != 0
-    ):
-        mid = len(list_to_sort_by_merge) // 2
-        left = list_to_sort_by_merge[:mid]
-        right = list_to_sort_by_merge[mid:]
-
-        mergeSort(left)
-        mergeSort(right)
-
+def merge_sort(arr):		
+    if len(arr) > 1:        
+        left_arr = arr[:len(arr) // 2]
+        right_arr = arr[len(arr) // 2:]
+        
+	# Recursively sort both halves
+        merge_sort(left_arr)
+        merge_sort(right_arr)
+	
         l = 0
         r = 0
-        i = 0
+        i = 0 
 
-        while l < len(left) and r < len(right):
-            if left[l] <= right[r]:
-                ASSIGNMENT(new_list=list_to_sort_by_merge, i=i, old_list=left, j=l)
+	# Merge the sorted halves back into the main array
+        while l < len(left_arr) and r < len(right_arr):
+            if left_arr[l] <= right_arr[r]:
+                arr[i] = left_arr[l]
                 l += 1
             else:
-                ASSIGNMENT(new_list=list_to_sort_by_merge, i=i, old_list=right, j=r)
+                arr[i] = right_arr[r]
                 r += 1
             i += 1
 
-        while l < len(left):
-            list_to_sort_by_merge[i] = left[l]
+	# Copy any remaining elements from left_arr
+        while l < len(left_arr):
+            arr[i] = left_arr[l]
             l += 1
             i += 1
 
-        while r < len(right):
-            list_to_sort_by_merge[i] = right[r]
+	# Copy any remaining elements from reght_arr
+        while r < len(right_arr):
+            arr[i] = right_arr[r]
             r += 1
             i += 1
 
 
-import matplotlib.pyplot as plt
+arr_test = [54, 26, 93, 17, 77, 31, 44, 55, 20]
 
-my_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-x = range(len(my_list))
-plt.plot(x, my_list)
+# Plot unsorted array
+x = range(len(arr_test))
+plt.plot(x, arr_test, marker='o')
+plt.title("Unsortd array")
+plt.xlabel("Index")
+plt.ylabel("Value")
+plt.grid(True)
 plt.show()
-mergeSort(my_list)
-x = range(len(my_list))
-plt.plot(x, my_list)
+
+# Sort the array
+merge_sort(arr_test)
+
+# Plot sorted array
+x = range(len(arr_test))
+plt.plot(x, arr_test, marker='o')
+plt.title("Sortd array")
+plt.xlabel("Index")
+plt.ylabel("Value")
+plt.grid(True)
 plt.show()
