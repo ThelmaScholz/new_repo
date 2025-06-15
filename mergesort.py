@@ -37,12 +37,25 @@ def merge_sort(arr):
             i += 1
 
 
-my_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+arr_test = [54, 26, 93, 17, 77, 31, 44, 55, 20]
 
-x = range(len(my_list))
-plt.plot(x, my_list)
+# Plot unsorted array
+x = range(len(arr_test))
+plt.plot(x, arr_test, marker='o')
+plt.title("Unsortd array")
+plt.xlabel("Index")
+plt.ylabel("Value")
+plt.grid(True)
 plt.show()
-merge_sort(my_list)
-x = range(len(my_list))
-plt.plot(x, my_list)
+
+# Sort the array
+merge_sort(arr_test)
+
+# Plot sorted array
+x = range(len(arr_test))
+plt.plot(x, arr_test, marker='o')
+plt.title("Sortd array")
+plt.xlabel("Index")
+plt.ylabel("Value")
+plt.grid(True)
 plt.show()
